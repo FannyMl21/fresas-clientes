@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Registrar Compra</title>
+
+<style>
+
+body{
+
+font-family:Arial;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+height:100vh;
+
+background:#ffe5ec;
+
+text-align:center;
+
+padding:20px;
+
+}
+
+.card{
+
+background:white;
+
+padding:40px;
+
+border-radius:25px;
+
+box-shadow:0 10px 25px rgba(0,0,0,0.08);
+
+max-width:350px;
+
+width:100%;
+
+}
+
+h1{
+color:#ff4d6d;
+margin-bottom:15px;
+}
+
+p{
+font-size:18px;
+color:#444;
+margin-top:10px;
+}
+
+.loader{
+
+margin:25px auto;
+
+width:50px;
+height:50px;
+
+border:5px solid #eee;
+
+border-top:5px solid #ff4d6d;
+
+border-radius:50%;
+
+animation:girar 1s linear infinite;
+
+}
+
+@keyframes girar{
+
+100%{
+transform:rotate(360deg);
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>🍓 Registrando compra...</h1>
+
+<div class="loader"></div>
+
+<p id="mensaje">
+Espera un momento
+</p>
+
+</div>
+
+<script>
+
+const API =
+"https://script.google.com/macros/s/AKfycbwUYoG26VicpM1Y3uWhJH-J86BpI93CPUKQZL57-rokQYHS-SIz6sgK7GIM4oZTp_n4/exec";
+
+const params =
+new URLSearchParams(window.location.search);
+
+const id = params.get("id");
+
+async function registrarCompra(){
+
+const admin =
+localStorage.getItem("admin");
+
+if(admin !== "true"){
+
+document.getElementById("mensaje")
+.innerText =
+"❌ Acceso denegado";
+
+return;
+
+}
+  
+if(!id){
+
+document.getElementById("mensaje")
+.innerText = "Cliente inválido";
+
+return;
+
+}
+
+try{
+
+await fetch(API,{
+
+method:"POST",
+
+body:JSON.stringify({
+
+id:id
+
+})
+
+});
+
+document.getElementById("mensaje")
+.innerText =
+"✅ Compra registrada";
+
+}
+catch(error){
+
+document.getElementById("mensaje")
+.innerText =
+"❌ Error al registrar";
+
+}
+
+}
+
+registrarCompra();
+
+</script>
+
+</body>
+</html>

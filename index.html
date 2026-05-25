@@ -280,6 +280,11 @@ document.getElementById("compras").innerText =
 
 let porcentaje = (data.compras / 6) * 100;
 
+const qr =
+`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://fannyml21.github.io/fresas-clientes/scan.html?id=${id}`;
+
+document.getElementById("qr").src = qr;
+
 document.getElementById("barra").style.width =
 `${porcentaje}%`;
 
@@ -290,8 +295,6 @@ document.getElementById("premio").innerText =
 
 document.getElementById("mensaje").innerText =
 "Puedes canjear tus fresas gratis en tu próxima compra 🍓";
-
-}
 
 document
 .getElementById("premio")
@@ -313,7 +316,8 @@ spread:90,
 origin:{ y:0.6 }
 
 });
-  
+
+}
 else{
 
 let faltan = 6 - data.compras;
@@ -325,13 +329,7 @@ document.getElementById("mensaje").innerText =
 `Te faltan ${faltan} compras para desbloquear tu recompensa`;
 
 }
-
 }
-
-const qr =
-`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://fannyml21.github.io/fresas-clientes/scan.html?id=${id}`;
-
-document.getElementById("qr").src = qr;
 
 cargarCliente();
 

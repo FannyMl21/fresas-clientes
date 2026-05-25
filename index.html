@@ -75,10 +75,6 @@ cursor:pointer;
 <div class="progress-bar" id="barra"></div>
 </div>
 
-<button onclick="agregarCompra()">
-+1 Compra
-</button>
-
 </div>
 
 <script>
@@ -107,19 +103,6 @@ let porcentaje = (data.compras / 6) * 100;
 
 document.getElementById("barra").style.width =
 `${porcentaje}%`;
-
-}
-
-async function agregarCompra(){
-
-await fetch(API,{
-method:"POST",
-body:JSON.stringify({
-id:id
-})
-});
-
-cargarCliente();
 
 }
 

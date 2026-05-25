@@ -123,7 +123,7 @@ id="whatsapp"
 placeholder="WhatsApp"
 >
 
-<button onclick="registrar()">
+<button id="btnRegistro" onclick="registrar()">
 Registrarme
 </button>
 
@@ -176,10 +176,10 @@ whatsapp:whatsapp
 const data = await response.json();
 
 document.getElementById("mensaje").innerText =
-`🎉 Registro exitoso\nTu ID es ${data.id}`;
+`🎉 ¡Bienvenido al Club!\nTu folio es ${data.id}`;
 
 const link =
-`https://fannymi21.github.io/fresas-clientes/?id=${data.id}`;
+`https://fannyml21.github.io/fresas-clientes/?id=${data.id}`;
 
 const tarjeta =
 document.getElementById("tarjeta");
@@ -187,6 +187,12 @@ document.getElementById("tarjeta");
 tarjeta.href = link;
 
 tarjeta.style.display = "block";
+
+document.getElementById("btnRegistro").style.display = "none";
+
+document.getElementById("nombre").style.display = "none";
+
+document.getElementById("whatsapp").style.display = "none";
 
 }
 

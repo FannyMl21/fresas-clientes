@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cliente Frecuente</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f7f7f7;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+margin:0;
+}
+
+.card{
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+width:320px;
+text-align:center;
+}
+
+h1{
+margin-bottom:10px;
+}
+
+.progress{
+width:100%;
+height:20px;
+background:#ddd;
+border-radius:10px;
+overflow:hidden;
+margin-top:15px;
+}
+
+.progress-bar{
+height:100%;
+background:#ff4d6d;
+width:0%;
+}
+
+button{
+margin-top:20px;
+padding:12px 20px;
+border:none;
+background:#ff4d6d;
+color:white;
+border-radius:10px;
+font-size:16px;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h1 id="nombre">Cargando...</h1>
+
+<p id="compras"></p>
+
+<p id="premio"></p>
+
+<div class="progress">
+<div class="progress-bar" id="barra"></div>
+</div>
+
+<button onclick="agregarCompra()">
++1 Compra
+</button>
+
+</div>
+
+<script>
+
+const API = "https://script.google.com/macros/s/AKfycbwUYoG26VicpM1Y3uWhJH-J86BpI93CPUKQZL57-rokQYHS-SIz6sgK7GIM4oZTp_n4/exec";
+
+const params = new URLSearchParams(window.location.search);
+
+const id = params.get("id");
+
+async function cargarCliente(){
+
+const response = await fetch(`${API}?id=${id}`);
+
+const data = await response.json();
+
+document.getElementById("nombre").innerText = data.nombre;
+
+document.getElementById("compras").innerText =
+`Compras: ${data.compras}/6`;
+
+document.getElementById("premio").innerText =
+`Premio: ${data.premio}`;
+
+let porcentaje = (data.compras / 6) * 100;
+
+document.getElementById("barra").style.width =
+`${porcentaje}%`;
+
+}
+
+async function agregarCompra(){
+
+await fetch(API,{
+method:"POST",
+body:JSON.stringify({
+id:id
+})
+});
+
+cargarCliente();
+
+}
+
+cargarCliente();
+
+</script>
+
+</body>
+</html>

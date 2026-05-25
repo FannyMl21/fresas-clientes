@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Panel Admin</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f5f5f5;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+margin:0;
+}
+
+.card{
+background:white;
+padding:30px;
+border-radius:20px;
+width:350px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+text-align:center;
+}
+
+input{
+width:100%;
+padding:12px;
+margin-top:15px;
+border-radius:10px;
+border:1px solid #ccc;
+font-size:16px;
+box-sizing:border-box;
+}
+
+button{
+width:100%;
+padding:14px;
+margin-top:15px;
+border:none;
+border-radius:10px;
+font-size:16px;
+cursor:pointer;
+background:#ff4d6d;
+color:white;
+}
+
+.info{
+margin-top:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>Panel Admin 🍓</h1>
+
+<input type="text" id="clienteID" placeholder="ID Cliente">
+
+<button onclick="buscarCliente()">
+Buscar Cliente
+</button>
+
+<div class="info">
+
+<h2 id="nombre"></h2>
+
+<p id="compras"></p>
+
+<p id="premio"></p>
+
+</div>
+
+<button onclick="agregarCompra()">
++1 Compra
+</button>
+
+</div>
+
+<script>
+
+const API = "https://script.google.com/macros/s/AKfycbwUYoG26VicpM1Y3uWhJH-J86BpI93CPUKQZL57-rokQYHS-SIz6sgK7GIM4oZTp_n4/exec";
+
+let clienteActual = "";
+
+async function buscarCliente(){
+
+const id = document.getElementById("clienteID").value;
+
+clienteActual = id;
+
+const response = await fetch(`${API}?id=${id}`);
+
+const data = await response.json();
+
+document.getElementById("nombre").innerText =
+data.nombre;
+
+document.getElementById("compras").innerText =
+`Compras: ${data.compras}`;
+
+document.getElementById("premio").innerText =
+`Premio: ${data.premio}`;
+
+}
+
+async function agregarCompra(){
+
+if(clienteActual == ""){
+alert("Busca un cliente primero");
+return;
+}
+
+await fetch(API,{
+method:"POST",
+body:JSON.stringify({
+id:clienteActual
+})
+});
+
+buscarCliente();
+
+alert("Compra agregada 🍓");
+
+}
+
+</script>
+
+</body>
+</html>

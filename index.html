@@ -64,8 +64,12 @@ transform:translateY(0);
 }
 
 .logo{
-font-size:45px;
-margin-bottom:10px;
+margin-bottom:25px;
+}
+
+.logo img{
+width:220px;
+max-width:100%;
 }
 
 h1{
@@ -122,6 +126,26 @@ font-size:14px;
 color:#999;
 }
 
+.qr-section{
+margin-top:35px;
+}
+
+.qr-section img{
+width:220px;
+background:white;
+padding:12px;
+border-radius:25px;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+.scan-text{
+margin-top:10px;
+letter-spacing:6px;
+font-size:14px;
+color:#ff4d6d;
+font-weight:bold;
+}
+
 </style>
 
 </head>
@@ -130,7 +154,9 @@ color:#999;
 
 <div class="card">
 
-<div class="logo">🍓</div>
+<div class="logo">
+<img src="logo.jpeg" alt="Logo">
+</div>
 
 <h1 id="nombre">
 Cargando...
@@ -147,6 +173,16 @@ Cargando...
 <p class="mensaje" id="mensaje">
 Cargando información...
 </p>
+
+<div class="qr-section">
+
+<img id="qr" src="">
+
+<p class="scan-text">
+SCAN ME
+</p>
+
+</div>
 
 <div class="footer">
 Gracias por elegirnos ❤️
@@ -201,6 +237,11 @@ document.getElementById("mensaje").innerText =
 }
 
 }
+
+const qr =
+`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://fannyml21.github.io/fresas-clientes/?id=${id}`;
+
+document.getElementById("qr").src = qr;
 
 cargarCliente();
 

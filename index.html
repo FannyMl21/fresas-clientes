@@ -8,53 +8,118 @@
 
 <style>
 
-body{
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 font-family:Arial;
-background:#f7f7f7;
+}
+
+body{
+height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-height:100vh;
-margin:0;
+background:
+linear-gradient(
+135deg,
+#fff0f3,
+#ffe5ec,
+#ffeef2
+);
+padding:20px;
 }
 
 .card{
-background:white;
-padding:30px;
-border-radius:20px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
-width:320px;
+
+width:350px;
+
+background:rgba(255,255,255,0.65);
+
+backdrop-filter:blur(15px);
+
+border-radius:30px;
+
+padding:35px 30px;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,0.08);
+
 text-align:center;
+
+border:1px solid rgba(255,255,255,0.4);
+
+animation:fade 0.7s ease;
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(15px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.logo{
+font-size:45px;
+margin-bottom:10px;
 }
 
 h1{
-margin-bottom:10px;
+font-size:38px;
+margin-bottom:15px;
+color:#222;
+}
+
+.compras{
+font-size:20px;
+margin-top:10px;
+color:#555;
+}
+
+.premio{
+margin-top:15px;
+font-size:20px;
+font-weight:bold;
+color:#ff4d6d;
 }
 
 .progress{
 width:100%;
-height:20px;
-background:#ddd;
-border-radius:10px;
+height:22px;
+background:#eee;
+border-radius:20px;
 overflow:hidden;
-margin-top:15px;
+margin-top:25px;
 }
 
 .progress-bar{
 height:100%;
-background:#ff4d6d;
 width:0%;
+background:
+linear-gradient(
+90deg,
+#ff4d6d,
+#ff758f
+);
+border-radius:20px;
+transition:0.4s;
 }
 
-button{
-margin-top:20px;
-padding:12px 20px;
-border:none;
-background:#ff4d6d;
-color:white;
-border-radius:10px;
-font-size:16px;
-cursor:pointer;
+.mensaje{
+margin-top:25px;
+font-size:17px;
+color:#666;
+line-height:1.5;
+}
+
+.footer{
+margin-top:25px;
+font-size:14px;
+color:#999;
 }
 
 </style>
@@ -65,14 +130,26 @@ cursor:pointer;
 
 <div class="card">
 
-<h1 id="nombre">Cargando...</h1>
+<div class="logo">🍓</div>
 
-<p id="compras"></p>
+<h1 id="nombre">
+Cargando...
+</h1>
 
-<p id="premio"></p>
+<p class="compras" id="compras"></p>
+
+<p class="premio" id="premio"></p>
 
 <div class="progress">
 <div class="progress-bar" id="barra"></div>
+</div>
+
+<p class="mensaje" id="mensaje">
+Cargando información...
+</p>
+
+<div class="footer">
+Gracias por elegirnos ❤️
 </div>
 
 </div>
@@ -91,18 +168,37 @@ const response = await fetch(`${API}?id=${id}`);
 
 const data = await response.json();
 
-document.getElementById("nombre").innerText = data.nombre;
+document.getElementById("nombre").innerText =
+data.nombre;
 
 document.getElementById("compras").innerText =
 `Compras: ${data.compras}/6`;
-
-document.getElementById("premio").innerText =
-`Premio: ${data.premio}`;
 
 let porcentaje = (data.compras / 6) * 100;
 
 document.getElementById("barra").style.width =
 `${porcentaje}%`;
+
+if(data.compras >= 6){
+
+document.getElementById("premio").innerText =
+"🎉 ¡Tu recompensa está lista!";
+
+document.getElementById("mensaje").innerText =
+"Puedes canjear tus fresas gratis en tu próxima compra 🍓";
+
+}
+else{
+
+let faltan = 6 - data.compras;
+
+document.getElementById("premio").innerText =
+"Premio en progreso ✨";
+
+document.getElementById("mensaje").innerText =
+`Te faltan ${faltan} compras para desbloquear tu recompensa`;
+
+}
 
 }
 

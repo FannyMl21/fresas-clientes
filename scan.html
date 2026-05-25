@@ -111,7 +111,8 @@ const API =
 const params =
 new URLSearchParams(window.location.search);
 
-const id = params.get("id");
+const id =
+params.get("id");
 
 async function registrarCompra(){
 
@@ -127,11 +128,12 @@ document.getElementById("mensaje")
 return;
 
 }
-  
+
 if(!id){
 
 document.getElementById("mensaje")
-.innerText = "Cliente inválido";
+.innerText =
+"Cliente inválido";
 
 return;
 
@@ -153,9 +155,7 @@ id:id
 
 document.getElementById("mensaje")
 .innerText =
-"✅ Compra registrada";
-
-}
+"✅ Compra registrada 🍓";
 
 if(navigator.vibrate){
 
@@ -172,7 +172,11 @@ spread:70,
 origin:{ y:0.7 }
 
 });
+
+}
 catch(error){
+
+console.log(error);
 
 document.getElementById("mensaje")
 .innerText =

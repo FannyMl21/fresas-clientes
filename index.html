@@ -50,6 +50,10 @@ text-align:center;
 border:1px solid rgba(255,255,255,0.4);
 
 animation:fade 0.7s ease;
+
+animation:entrada 0.8s ease;
+
+transition:0.4s;
 }
 
 @keyframes fade{
@@ -146,9 +150,73 @@ color:#ff4d6d;
 font-weight:bold;
 }
 
+@keyframes entrada{
+
+from{
+opacity:0;
+transform:
+translateY(30px)
+scale(0.95);
+}
+
+to{
+opacity:1;
+transform:
+translateY(0)
+scale(1);
+}
+
+}
+
+.qr-section img{
+
+transition:0.4s;
+
+animation:flotar 3s ease-in-out infinite;
+
+}
+
+@keyframes flotar{
+
+0%{
+transform:translateY(0px);
+}
+
+50%{
+transform:translateY(-8px);
+}
+
+100%{
+transform:translateY(0px);
+}
+
+}
+
+.premio-activo{
+
+animation:brillo 1s infinite alternate;
+
+}
+
+@keyframes brillo{
+
+from{
+transform:scale(1);
+text-shadow:0 0 0px #ff4d6d;
+}
+
+to{
+transform:scale(1.03);
+text-shadow:0 0 18px #ff4d6d;
+}
+
+}
+  
 </style>
 
 </head>
+  
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <body>
 
@@ -224,6 +292,28 @@ document.getElementById("mensaje").innerText =
 "Puedes canjear tus fresas gratis en tu próxima compra 🍓";
 
 }
+
+document
+.getElementById("premio")
+.classList
+.add("premio-activo");
+
+if(navigator.vibrate){
+
+navigator.vibrate([200,100,200]);
+
+}
+
+confetti({
+
+particleCount:150,
+
+spread:90,
+
+origin:{ y:0.6 }
+
+});
+  
 else{
 
 let faltan = 6 - data.compras;

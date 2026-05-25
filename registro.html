@@ -157,6 +157,31 @@ return;
 
 }
 
+const clienteGuardado = localStorage.getItem("clienteID");
+
+if(clienteGuardado){
+
+const link =
+`https://fannyml21.github.io/fresas-clientes/?id=${clienteGuardado}`;
+
+document.getElementById("mensaje").innerText =
+`🍓 Ya tienes una cuenta activa`;
+
+const tarjeta =
+document.getElementById("tarjeta");
+
+tarjeta.href = link;
+
+tarjeta.style.display = "block";
+
+document.getElementById("btnRegistro").remove();
+
+document.getElementById("nombre").remove();
+
+document.getElementById("whatsapp").remove();
+
+}
+
 const response = await fetch(API,{
 
 method:"POST",
@@ -174,6 +199,8 @@ whatsapp:whatsapp
 });
 
 const data = await response.json();
+
+localStorage.setItem("clienteID", data.id);
 
 document.getElementById("mensaje").innerText =
 `🎉 ¡Bienvenido al Club!\nTu folio es ${data.id}`;

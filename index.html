@@ -268,25 +268,30 @@ const id = params.get("id");
 
 async function cargarCliente(){
 
-const response = await fetch(`${API}?id=${id}`);
+try{
 
-const data = await response.json();
+const response =
+await fetch(`${API}?id=${id}&t=${Date.now()}`);
+
+const data =
+await response.json();
 
 document.getElementById("nombre").innerText =
-data.nombre;
+data.nombre || "Cliente";
 
 document.getElementById("compras").innerText =
 `Compras: ${data.compras}/6`;
 
-let porcentaje = (data.compras / 6) * 100;
+let porcentaje =
+(data.compras / 6) * 100;
+
+document.getElementById("barra").style.width =
+`${porcentaje}%`;
 
 const qr =
 `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://fannyml21.github.io/fresas-clientes/scan.html?id=${id}`;
 
 document.getElementById("qr").src = qr;
-
-document.getElementById("barra").style.width =
-`${porcentaje}%`;
 
 if(data.compras >= 6){
 
@@ -320,7 +325,8 @@ origin:{ y:0.6 }
 }
 else{
 
-let faltan = 6 - data.compras;
+let faltan =
+6 - data.compras;
 
 document.getElementById("premio").innerText =
 "Premio en progreso ✨";
@@ -329,6 +335,20 @@ document.getElementById("mensaje").innerText =
 `Te faltan ${faltan} compras para desbloquear tu recompensa`;
 
 }
+
+}
+catch(error){
+
+console.log(error);
+
+document.getElementById("nombre").innerText =
+"Error";
+
+document.getElementById("mensaje").innerText =
+"No se pudo cargar la información";
+
+}
+
 }
 
 cargarCliente();

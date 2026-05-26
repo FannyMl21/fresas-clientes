@@ -228,12 +228,12 @@ return;
 const codigo =
 generarCodigo();
 
+const url =
+
+`${API}?guardarPremio=true&codigo=${encodeURIComponent(codigo)}&nombre=${encodeURIComponent(nombre)}&whatsapp=${encodeURIComponent(whatsapp)}&premio=${encodeURIComponent(premio)}&t=${Date.now()}`;
+
 const response =
-await fetch(
-
-`${API}?guardarPremio=true&codigo=${encodeURIComponent(codigo)}&nombre=${encodeURIComponent(nombre)}&whatsapp=${encodeURIComponent(whatsapp)}&premio=${encodeURIComponent(premio)}&t=${Date.now()}`
-
-);
+await fetch(url);
 
 const data =
 await response.json();

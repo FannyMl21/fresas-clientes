@@ -76,6 +76,32 @@ height:340px;
 
 .ruleta{
 
+.texto{
+
+position:absolute;
+
+top:50%;
+left:50%;
+
+transform-origin:center;
+
+font-size:16px;
+
+font-weight:bold;
+
+color:white;
+
+text-shadow:
+0 2px 5px rgba(0,0,0,0.25);
+
+width:120px;
+
+text-align:center;
+
+margin-left:-60px;
+
+}
+
 width:100%;
 
 height:100%;
@@ -212,9 +238,39 @@ max-width:320px;
 
 <div class="flecha"></div>
 
-<div class="ruleta" id="ruleta"></div>
+<div class="ruleta" id="ruleta">
+
+<div class="texto" style="transform:rotate(25deg) translateY(-125px);">
+10% OFF
+</div>
+
+<div class="texto" style="transform:rotate(75deg) translateY(-125px);">
+15% OFF
+</div>
+
+<div class="texto" style="transform:rotate(125deg) translateY(-125px);">
+Topping
+</div>
+
+<div class="texto" style="transform:rotate(175deg) translateY(-125px);">
+20% OFF
+</div>
+
+<div class="texto" style="transform:rotate(225deg) translateY(-125px);">
+5 vasos
+</div>
+
+<div class="texto" style="transform:rotate(275deg) translateY(-125px);">
+Refill
+</div>
+
+<div class="texto" style="transform:rotate(325deg) translateY(-125px);">
+35% OFF
+</div>
 
 </div>
+
+  
 
 <button onclick="girarRuleta()" id="btn">
 GIRAR

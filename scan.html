@@ -50,24 +50,26 @@ width:100%;
 h1{
 color:#ff4d6d;
 margin-bottom:15px;
+font-size:38px;
 }
 
 p{
-font-size:18px;
+font-size:20px;
 color:#444;
-margin-top:10px;
+margin-top:15px;
+line-height:1.5;
 }
 
 .loader{
 
-margin:25px auto;
+margin:30px auto;
 
-width:50px;
-height:50px;
+width:60px;
+height:60px;
 
-border:5px solid #eee;
+border:6px solid #eee;
 
-border-top:5px solid #ff4d6d;
+border-top:6px solid #ff4d6d;
 
 border-radius:50%;
 
@@ -83,25 +85,35 @@ transform:rotate(360deg);
 
 }
 
+.ok{
+color:#22c55e;
+font-weight:bold;
+}
+
+.error{
+color:#ef4444;
+font-weight:bold;
+}
+
 </style>
 
 </head>
 
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-  
 <body>
 
 <div class="card">
 
 <h1>🍓 Registrando compra...</h1>
 
-<div class="loader"></div>
+<div class="loader" id="loader"></div>
 
 <p id="mensaje">
 Espera un momento
 </p>
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <script>
 
@@ -114,6 +126,9 @@ new URLSearchParams(window.location.search);
 const id =
 params.get("id");
 
+const scan =
+params.get("scan");
+
 async function registrarCompra(){
 
 const admin =
@@ -121,9 +136,12 @@ localStorage.getItem("admin");
 
 if(admin !== "true"){
 
+document.getElementById("loader")
+.style.display = "none";
+
 document.getElementById("mensaje")
-.innerText =
-"❌ Acceso denegado";
+.innerHTML =
+'<span class="error">❌ Acceso denegado</span>';
 
 return;
 
@@ -131,9 +149,12 @@ return;
 
 if(!id){
 
+document.getElementById("loader")
+.style.display = "none";
+
 document.getElementById("mensaje")
-.innerText =
-"Cliente inválido";
+.innerHTML =
+'<span class="error">❌ Cliente inválido</span>';
 
 return;
 
@@ -141,25 +162,22 @@ return;
 
 try{
 
-await fetch(API,{
+const response =
+await fetch(
+`${API}?id=${id}&scan=true&t=${Date.now()}`
+);
 
-method:"POST",
+const data =
+await response.json();
 
-headers:{
-"Content-Type":"application/json"
-},
+document.getElementById("loader")
+.style.display = "none";
 
-body:JSON.stringify({
-
-id:id
-
-})
-
-});
+if(data.success){
 
 document.getElementById("mensaje")
-.innerText =
-"✅ Compra registrada 🍓";
+.innerHTML =
+`<span class="ok">✅ Compra registrada 🍓</span>`;
 
 if(navigator.vibrate){
 
@@ -169,22 +187,34 @@ navigator.vibrate(200);
 
 confetti({
 
-particleCount:100,
+particleCount:120,
 
-spread:70,
+spread:80,
 
 origin:{ y:0.7 }
 
 });
 
 }
+else{
+
+document.getElementById("mensaje")
+.innerHTML =
+'<span class="error">❌ Error al registrar</span>';
+
+}
+
+}
 catch(error){
 
 console.log(error);
 
+document.getElementById("loader")
+.style.display = "none";
+
 document.getElementById("mensaje")
-.innerText =
-"❌ Error al registrar";
+.innerHTML =
+'<span class="error">❌ Error de conexión</span>';
 
 }
 

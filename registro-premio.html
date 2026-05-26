@@ -228,7 +228,7 @@ return;
 const codigo =
 generarCodigo();
 
-await fetch(API,{
+const response = await fetch(API,{
 
 method:"POST",
 
@@ -252,6 +252,11 @@ premio:premio
 
 });
 
+const data =
+await response.json();
+
+if(data.success){
+
 document.getElementById("mensaje")
 .innerHTML =
 "✅ Premio guardado correctamente";
@@ -270,7 +275,13 @@ document.getElementById("whatsapp")
 .remove();
 
 }
+else{
 
+document.getElementById("mensaje")
+.innerHTML =
+"❌ Error al guardar";
+
+}
 </script>
 
 </body>

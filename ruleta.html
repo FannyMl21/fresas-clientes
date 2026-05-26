@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Ruleta de Premios</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+
+height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+flex-direction:column;
+
+background:
+linear-gradient(
+135deg,
+#fff0f3,
+#ffe5ec,
+#fff5f7
+);
+
+overflow:hidden;
+
+padding:20px;
+
+}
+
+.logo{
+margin-bottom:20px;
+}
+
+.logo img{
+width:220px;
+}
+
+h1{
+
+font-size:34px;
+
+margin-bottom:20px;
+
+color:#ff4d6d;
+
+text-align:center;
+
+}
+
+.ruleta-container{
+
+position:relative;
+
+width:340px;
+
+height:340px;
+
+}
+
+.ruleta{
+
+width:100%;
+
+height:100%;
+
+border-radius:50%;
+
+border:12px solid white;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,0.15);
+
+position:relative;
+
+overflow:hidden;
+
+transition:
+transform 5s cubic-bezier(
+0.17,
+0.67,
+0.12,
+0.99
+);
+
+background:
+conic-gradient(
+#ff4d6d 0deg 51deg,
+#ff758f 51deg 102deg,
+#ff8fab 102deg 153deg,
+#ffb3c1 153deg 204deg,
+#ffc2d1 204deg 255deg,
+#ffccd5 255deg 306deg,
+#ffe5ec 306deg 360deg
+);
+
+}
+
+.flecha{
+
+position:absolute;
+
+top:-18px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+width:0;
+height:0;
+
+border-left:18px solid transparent;
+border-right:18px solid transparent;
+border-top:35px solid #ff4d6d;
+
+z-index:10;
+
+}
+
+button{
+
+margin-top:35px;
+
+padding:16px 40px;
+
+border:none;
+
+border-radius:20px;
+
+background:#ff4d6d;
+
+color:white;
+
+font-size:20px;
+
+cursor:pointer;
+
+box-shadow:
+0 8px 20px rgba(255,77,109,0.3);
+
+transition:0.3s;
+
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+.resultado{
+
+margin-top:30px;
+
+font-size:24px;
+
+font-weight:bold;
+
+text-align:center;
+
+color:#333;
+
+line-height:1.5;
+
+min-height:70px;
+
+}
+
+.info{
+
+margin-top:15px;
+
+font-size:15px;
+
+color:#666;
+
+text-align:center;
+
+line-height:1.6;
+
+max-width:320px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="logo">
+<img src="logo.jpeg">
+</div>
+
+<h1>🎡 Gira y gana</h1>
+
+<div class="ruleta-container">
+
+<div class="flecha"></div>
+
+<div class="ruleta" id="ruleta"></div>
+
+</div>
+
+<button onclick="girarRuleta()" id="btn">
+GIRAR
+</button>
+
+<div class="resultado" id="resultado"></div>
+
+<div class="info">
+Premios válidos únicamente para próximos eventos 🍓<br>
+No transferibles y de un solo uso.
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+
+const premios = [
+
+"10% de descuento",
+"15% de descuento",
+"Topping extra",
+"20% de descuento",
+"5 vasos gratis",
+"1 refill extra",
+"35% de descuento"
+
+];
+
+// Probabilidades
+const probabilidades = [
+
+35,
+25,
+18,
+10,
+6,
+5,
+1
+
+];
+
+let girando = false;
+
+function elegirPremio(){
+
+let total =
+probabilidades.reduce((a,b)=>a+b);
+
+let random =
+Math.random() * total;
+
+let acumulado = 0;
+
+for(let i = 0; i < premios.length; i++){
+
+acumulado += probabilidades[i];
+
+if(random <= acumulado){
+
+return i;
+
+}
+
+}
+
+return 0;
+
+}
+
+function girarRuleta(){
+
+if(girando) return;
+
+girando = true;
+
+const indice =
+elegirPremio();
+
+const premio =
+premios[indice];
+
+const grados =
+(360 * 6) +
+(indice * (360 / premios.length));
+
+const ruleta =
+document.getElementById("ruleta");
+
+ruleta.style.transform =
+`rotate(-${grados}deg)`;
+
+document.getElementById("btn")
+disabled = true;
+
+setTimeout(()=>{
+
+document.getElementById("resultado")
+.innerHTML =
+`🎉 Ganaste:<br>${premio}`;
+
+confetti({
+
+particleCount:200,
+
+spread:90,
+
+origin:{ y:0.6 }
+
+});
+
+if(navigator.vibrate){
+
+navigator.vibrate([200,100,200]);
+
+}
+
+setTimeout(()=>{
+
+window.location.href =
+`registro-premio.html?premio=${encodeURIComponent(premio)}`;
+
+},2500);
+
+},5000);
+
+}
+
+</script>
+
+</body>
+</html>

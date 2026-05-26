@@ -270,8 +270,6 @@ Refill
 
 </div>
 
-  
-
 <button onclick="girarRuleta()" id="btn">
 GIRAR
 </button>
@@ -279,8 +277,8 @@ GIRAR
 <div class="resultado" id="resultado"></div>
 
 <div class="info">
-Premios válidos únicamente para próximos eventos 🍓<br>
-No transferibles y de un solo uso.
+Descuentos válidos únicamente para tu próximo evento 🍓<br>
+No transferibles!!!.
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -314,6 +312,23 @@ const probabilidades = [
 
 let girando = false;
 
+const yaJugo =
+localStorage.getItem("ruletaJugado");
+
+if(yaJugo === "true"){
+
+document.getElementById("btn")
+.disabled = true;
+
+document.getElementById("btn")
+.innerText = "Ya participaste";
+
+document.getElementById("resultado")
+.innerHTML =
+"🍓 Ya utilizaste tu giro";
+
+}
+
 function elegirPremio(){
 
 let total =
@@ -345,6 +360,11 @@ function girarRuleta(){
 if(girando) return;
 
 girando = true;
+
+localStorage.setItem(
+"ruletaJugado",
+"true"
+);
 
 const indice =
 elegirPremio();

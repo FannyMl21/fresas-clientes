@@ -228,29 +228,12 @@ return;
 const codigo =
 generarCodigo();
 
-const response = await fetch(API,{
+const response =
+await fetch(
 
-method:"POST",
+`${API}?guardarPremio=true&codigo=${encodeURIComponent(codigo)}&nombre=${encodeURIComponent(nombre)}&whatsapp=${encodeURIComponent(whatsapp)}&premio=${encodeURIComponent(premio)}&t=${Date.now()}`
 
-headers:{
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify({
-
-action:"guardarPremio",
-
-codigo:codigo,
-
-nombre:nombre,
-
-whatsapp:whatsapp,
-
-premio:premio
-
-})
-
-});
+);
 
 const data =
 await response.json();

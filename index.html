@@ -1110,10 +1110,40 @@ document
 
 }
 
+// ==========================================
+// GENERAR QR
+// ==========================================
+
+function generarQR(id){
+
+    if(!id){
+        console.log("No se encontró ID para generar QR");
+        return;
+    }
+
+    const qr = document.getElementById("qr");
+
+    if(!qr){
+        console.log("No se encontró el elemento QR");
+        return;
+    }
+
+    const scanURL =
+        "https://fannyml21.github.io/fresas-clientes/scan.html?id=" +
+        encodeURIComponent(id);
+
+    qr.src =
+        "https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=" +
+        encodeURIComponent(scanURL);
+
+}
+
 
 // ==========================================
 // INICIAR
 // ==========================================
+
+generarQR(id);
 
 cargarCliente();
 

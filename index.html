@@ -1,359 +1,1125 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Cliente Frecuente</title>
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Fresas & Crema Co. | Tarjeta de Lealtad</title>
+
 
 <style>
+
+/* ==========================================
+   CONFIGURACIÓN GENERAL
+========================================== */
 
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial;
+font-family:Arial, sans-serif;
 }
 
+
 body{
-height:100vh;
+
+min-height:100vh;
+
 display:flex;
+
 justify-content:center;
+
 align-items:center;
+
 background:
-linear-gradient(
-135deg,
-#fff0f3,
-#ffe5ec,
-#ffeef2
-);
+
+radial-gradient(
+circle at top left,
+rgba(243,166,189,.16),
+transparent 35%
+),
+
+radial-gradient(
+circle at bottom right,
+rgba(243,166,189,.10),
+transparent 35%
+),
+
+#0d0d0d;
+
 padding:20px;
+
+color:white;
+
 }
+
+
+/* ==========================================
+   TARJETA
+========================================== */
 
 .card{
 
-width:350px;
+width:100%;
 
-background:rgba(255,255,255,0.65);
+max-width:390px;
 
-backdrop-filter:blur(15px);
+background:#151515;
+
+border:1px solid rgba(243,166,189,.65);
 
 border-radius:30px;
 
-padding:35px 30px;
-
-box-shadow:
-0 10px 30px rgba(0,0,0,0.08);
+padding:28px 25px 25px;
 
 text-align:center;
 
-border:1px solid rgba(255,255,255,0.4);
+position:relative;
 
-animation:fade 0.7s ease;
+overflow:hidden;
 
-animation:entrada 0.8s ease;
+box-shadow:
 
-transition:0.4s;
+0 20px 60px rgba(0,0,0,.55),
+
+0 0 35px rgba(243,166,189,.08);
+
+animation:entrada .8s ease;
+
 }
 
-@keyframes fade{
-from{
-opacity:0;
-transform:translateY(15px);
+
+/* brillo decorativo */
+
+.card::before{
+
+content:"";
+
+position:absolute;
+
+width:180px;
+
+height:180px;
+
+border-radius:50%;
+
+background:rgba(243,166,189,.07);
+
+top:-90px;
+
+right:-80px;
+
 }
-to{
-opacity:1;
-transform:translateY(0);
+
+.card::after{
+
+content:"";
+
+position:absolute;
+
+width:140px;
+
+height:140px;
+
+border-radius:50%;
+
+background:rgba(243,166,189,.05);
+
+bottom:-70px;
+
+left:-60px;
+
 }
+
+
+/* ==========================================
+   DECORACIÓN SUPERIOR
+========================================== */
+
+.decoracion{
+
+color:#f3a6bd;
+
+font-size:17px;
+
+letter-spacing:5px;
+
+margin-bottom:12px;
+
 }
+
+
+/* ==========================================
+   LOGO
+========================================== */
 
 .logo{
-margin-bottom:25px;
+
+display:flex;
+
+justify-content:center;
+
+margin-bottom:15px;
+
+position:relative;
+
+z-index:2;
+
 }
+
 
 .logo img{
-width:220px;
-max-width:100%;
+
+width:175px;
+
+max-width:80%;
+
+height:auto;
+
 }
 
-h1{
-font-size:38px;
-margin-bottom:15px;
-color:#222;
+
+/* ==========================================
+   TEXTO
+========================================== */
+
+.titulo{
+
+font-size:12px;
+
+letter-spacing:4px;
+
+text-transform:uppercase;
+
+color:#aaaaaa;
+
+margin-bottom:8px;
+
 }
 
-.compras{
-font-size:20px;
-margin-top:10px;
-color:#555;
-}
 
-.premio{
-margin-top:15px;
-font-size:20px;
+.nombre{
+
+font-family:Georgia, serif;
+
+font-size:30px;
+
 font-weight:bold;
-color:#ff4d6d;
+
+color:#f3a6bd;
+
+margin-bottom:18px;
+
+word-break:break-word;
+
 }
+
+
+/* ==========================================
+   SECCIÓN DE COMPRAS
+========================================== */
+
+.seccion-compras{
+
+background:#1d1d1d;
+
+border:1px solid #303030;
+
+border-radius:22px;
+
+padding:20px 16px;
+
+position:relative;
+
+z-index:2;
+
+}
+
+
+.etiqueta{
+
+font-size:12px;
+
+letter-spacing:2px;
+
+text-transform:uppercase;
+
+color:#999999;
+
+margin-bottom:7px;
+
+}
+
+
+.numero-compras{
+
+font-family:Georgia, serif;
+
+font-size:30px;
+
+font-weight:bold;
+
+color:white;
+
+}
+
+
+.numero-compras span{
+
+color:#f3a6bd;
+
+}
+
+
+/* ==========================================
+   ESTAMPAS DE LAS 6 COMPRAS
+========================================== */
+
+.estampas{
+
+display:flex;
+
+justify-content:center;
+
+gap:8px;
+
+margin-top:18px;
+
+}
+
+
+.estampa{
+
+width:34px;
+
+height:34px;
+
+border-radius:50%;
+
+border:1px solid #555;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:15px;
+
+background:#111;
+
+color:#777;
+
+transition:.3s;
+
+}
+
+
+.estampa.activa{
+
+background:#f3a6bd;
+
+border-color:#f3a6bd;
+
+color:#111;
+
+box-shadow:
+0 0 12px rgba(243,166,189,.35);
+
+transform:scale(1.05);
+
+}
+
+
+/* ==========================================
+   BARRA
+========================================== */
 
 .progress{
+
 width:100%;
-height:22px;
-background:#eee;
+
+height:8px;
+
+background:#303030;
+
 border-radius:20px;
+
 overflow:hidden;
-margin-top:25px;
+
+margin-top:20px;
+
 }
+
 
 .progress-bar{
+
 height:100%;
+
 width:0%;
+
 background:
+
 linear-gradient(
 90deg,
-#ff4d6d,
-#ff758f
+#d986a3,
+#f3a6bd,
+#ffd2df
 );
+
 border-radius:20px;
-transition:0.4s;
+
+transition:width .7s ease;
+
 }
+
+
+/* ==========================================
+   RECOMPENSA
+========================================== */
+
+.premio{
+
+margin-top:20px;
+
+font-size:18px;
+
+font-weight:bold;
+
+color:#f3a6bd;
+
+}
+
+
+.premio-activo{
+
+animation:brillo 1.2s infinite alternate;
+
+}
+
+
+.recompensas-extra{
+
+margin-top:7px;
+
+font-size:13px;
+
+color:#bdbdbd;
+
+}
+
+
+/* ==========================================
+   MENSAJE
+========================================== */
 
 .mensaje{
-margin-top:25px;
-font-size:17px;
-color:#666;
+
+margin-top:14px;
+
+font-size:14px;
+
 line-height:1.5;
+
+color:#cfcfcf;
+
 }
 
-.footer{
-margin-top:25px;
-font-size:14px;
-color:#999;
-}
+
+/* ==========================================
+   QR
+========================================== */
 
 .qr-section{
-margin-top:35px;
+
+margin-top:25px;
+
+padding-top:22px;
+
+border-top:1px solid #292929;
+
+position:relative;
+
+z-index:2;
+
 }
 
-.qr-section img{
-width:220px;
-background:white;
-padding:12px;
-border-radius:25px;
-box-shadow:0 5px 15px rgba(0,0,0,0.08);
+
+.qr-title{
+
+font-size:11px;
+
+letter-spacing:3px;
+
+color:#999999;
+
+margin-bottom:13px;
+
+text-transform:uppercase;
+
 }
+
+
+.qr-container{
+
+display:inline-flex;
+
+background:white;
+
+padding:10px;
+
+border-radius:18px;
+
+box-shadow:
+
+0 5px 25px rgba(0,0,0,.4),
+
+0 0 20px rgba(243,166,189,.10);
+
+}
+
+
+.qr-container img{
+
+width:155px;
+
+height:155px;
+
+display:block;
+
+}
+
 
 .scan-text{
+
 margin-top:10px;
-letter-spacing:6px;
-font-size:14px;
-color:#ff4d6d;
+
+font-size:11px;
+
+letter-spacing:3px;
+
+color:#f3a6bd;
+
 font-weight:bold;
+
 }
+
+
+/* ==========================================
+   PIE
+========================================== */
+
+.footer{
+
+margin-top:22px;
+
+font-size:12px;
+
+color:#777;
+
+letter-spacing:1px;
+
+}
+
+
+.footer span{
+
+color:#f3a6bd;
+
+}
+
+
+/* ==========================================
+   ANIMACIONES
+========================================== */
 
 @keyframes entrada{
 
 from{
+
 opacity:0;
+
 transform:
 translateY(30px)
-scale(0.95);
+scale(.96);
+
 }
 
 to{
+
 opacity:1;
+
 transform:
 translateY(0)
 scale(1);
-}
 
-}
-
-.qr-section img{
-
-transition:0.4s;
-
-animation:flotar 3s ease-in-out infinite;
-
-}
-
-@keyframes flotar{
-
-0%{
-transform:translateY(0px);
-}
-
-50%{
-transform:translateY(-8px);
-}
-
-100%{
-transform:translateY(0px);
 }
 
 }
 
-.premio-activo{
-
-animation:brillo 1s infinite alternate;
-
-}
 
 @keyframes brillo{
 
 from{
+
 transform:scale(1);
-text-shadow:0 0 0px #ff4d6d;
+
+text-shadow:
+0 0 0 rgba(243,166,189,0);
+
 }
 
 to{
+
 transform:scale(1.03);
-text-shadow:0 0 18px #ff4d6d;
+
+text-shadow:
+0 0 18px rgba(243,166,189,.65);
+
 }
 
 }
-  
+
+
+/* ==========================================
+   MÓVIL
+========================================== */
+
+@media(max-width:380px){
+
+.card{
+
+padding:
+25px 18px 22px;
+
+}
+
+
+.nombre{
+
+font-size:26px;
+
+}
+
+
+.estampa{
+
+width:31px;
+
+height:31px;
+
+font-size:13px;
+
+}
+
+}
+
 </style>
 
 </head>
-  
+
+
+<!-- ==========================================
+     CONFETTI
+========================================== -->
+
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
 
 <body>
 
+
 <div class="card">
 
-<div class="logo">
-<img src="logo.jpeg" alt="Logo">
+
+<!-- DECORACIÓN -->
+
+<div class="decoracion">
+
+♡ 🍓 ♡
+
 </div>
 
-<h1 id="nombre">
+
+<!-- LOGO -->
+
+<div class="logo">
+
+<img
+src="logo.jpeg"
+alt="Fresas & Crema Co."
+>
+
+</div>
+
+
+<div class="titulo">
+
+Tarjeta de lealtad
+
+</div>
+
+
+<!-- NOMBRE -->
+
+<div
+class="nombre"
+id="nombre"
+>
+
 Cargando...
-</h1>
 
-<p class="compras" id="compras"></p>
+</div>
 
-<p class="premio" id="premio"></p>
+
+<!-- COMPRAS -->
+
+<div class="seccion-compras">
+
+
+<div class="etiqueta">
+
+Tu progreso
+
+</div>
+
+
+<div
+class="numero-compras"
+id="compras"
+>
+
+Cargando...
+
+</div>
+
+
+<!-- 6 ESTAMPAS -->
+
+<div class="estampas">
+
+<div class="estampa" id="s1">🍓</div>
+
+<div class="estampa" id="s2">🍓</div>
+
+<div class="estampa" id="s3">🍓</div>
+
+<div class="estampa" id="s4">🍓</div>
+
+<div class="estampa" id="s5">🍓</div>
+
+<div class="estampa" id="s6">🍓</div>
+
+</div>
+
+
+<!-- BARRA -->
 
 <div class="progress">
-<div class="progress-bar" id="barra"></div>
+
+<div
+class="progress-bar"
+id="barra"
+></div>
+
 </div>
 
-<p class="mensaje" id="mensaje">
+
+</div>
+
+
+<!-- RECOMPENSA -->
+
+<div
+class="premio"
+id="premio"
+>
+
+Cargando...
+
+</div>
+
+
+<div
+class="recompensas-extra"
+id="recompensasExtra"
+>
+
+</div>
+
+
+<div
+class="mensaje"
+id="mensaje"
+>
+
 Cargando información...
-</p>
+
+</div>
+
+
+<!-- QR -->
 
 <div class="qr-section">
 
-<img id="qr" src="">
 
-<p class="scan-text">
-SCAN ME
-</p>
+<div class="qr-title">
+
+Presenta este código para registrar tu compra
 
 </div>
+
+
+<div class="qr-container">
+
+<img
+id="qr"
+src=""
+alt="Código QR"
+>
+
+</div>
+
+
+<div class="scan-text">
+
+SCAN ME
+
+</div>
+
+
+</div>
+
+
+<!-- FOOTER -->
 
 <div class="footer">
-Gracias por elegirnos ❤️
-</div>
+
+Fresas & Crema Co. <span>♡</span>
 
 </div>
+
+
+</div>
+
+
 
 <script>
 
-const API = "https://script.google.com/macros/s/AKfycbwUYoG26VicpM1Y3uWhJH-J86BpI93CPUKQZL57-rokQYHS-SIz6sgK7GIM4oZTp_n4/exec";
 
-const params = new URLSearchParams(window.location.search);
+// ==========================================
+// API
+// ==========================================
 
-const id = params.get("id");
+const API =
+"https://script.google.com/macros/s/AKfycbwUYoG26VicpM1Y3uWhJH-J86BpI93CPUKQZL57-rokQYHS-SIz6sgK7GIM4oZTp_n4/exec";
+
+
+// ==========================================
+// OBTENER ID
+// ==========================================
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const id =
+params.get("id");
+
+
+// ==========================================
+// CARGAR CLIENTE
+// ==========================================
 
 async function cargarCliente(){
 
+
+if(!id){
+
+document
+.getElementById("nombre")
+.innerText =
+"Cliente";
+
+
+document
+.getElementById("mensaje")
+.innerText =
+"No se encontró el identificador de la tarjeta.";
+
+return;
+
+}
+
+
 try{
 
+
 const response =
-await fetch(`${API}?id=${id}&t=${Date.now()}`);
+await fetch(
+`${API}?id=${encodeURIComponent(id)}&t=${Date.now()}`
+);
+
 
 const data =
 await response.json();
 
-document.getElementById("nombre").innerText =
-data.nombre || "Cliente";
 
-document.getElementById("compras").innerText =
-`Compras: ${data.compras}/6`;
+if(!data.nombre){
 
-let porcentaje =
-(data.compras / 6) * 100;
-
-document.getElementById("barra").style.width =
-`${porcentaje}%`;
-
-const qr =
-`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://fannyml21.github.io/fresas-clientes/scan.html?id=${id}`;
-
-document.getElementById("qr").src = qr;
-
-if(data.compras >= 6){
-
-document.getElementById("premio").innerText =
-"🎉 ¡Tu recompensa está lista!";
-
-document.getElementById("mensaje").innerText =
-"Puedes canjear tus fresas gratis en tu próxima compra 🍓";
-
-document
-.getElementById("premio")
-.classList
-.add("premio-activo");
-
-if(navigator.vibrate){
-
-navigator.vibrate([200,100,200]);
+throw new Error(
+"Cliente no encontrado"
+);
 
 }
 
+
+// ==========================================
+// NOMBRE
+// ==========================================
+
+document
+.getElementById("nombre")
+.innerText =
+data.nombre;
+
+
+// ==========================================
+// COMPRAS
+// ==========================================
+
+const compras =
+Number(data.compras) || 0;
+
+
+// Número de recompensas disponibles
+
+const recompensas =
+Math.floor(compras / 6);
+
+
+// Compras hacia la siguiente recompensa
+
+const sobrantes =
+compras % 6;
+
+
+// ==========================================
+// TEXTO DE COMPRAS
+// ==========================================
+
+if(recompensas > 0){
+
+document
+.getElementById("compras")
+.innerHTML =
+
+`${compras} <span>compras</span>`;
+
+}else{
+
+document
+.getElementById("compras")
+.innerHTML =
+
+`${compras} <span>/ 6</span>`;
+
+}
+
+
+// ==========================================
+// ESTAMPAS
+// ==========================================
+
+const comprasEnCiclo =
+compras % 6;
+
+
+for(let i = 1; i <= 6; i++){
+
+const estampa =
+document.getElementById(
+`s${i}`
+);
+
+
+if(
+comprasEnCiclo >= i ||
+(comprasEnCiclo === 0 && compras >= 6)
+){
+
+estampa.classList.add(
+"activa"
+);
+
+}
+
+}
+
+
+// ==========================================
+// BARRA DE PROGRESO
+// ==========================================
+
+let porcentaje =
+(comprasEnCiclo / 6) * 100;
+
+
+// Si acaba de completar exactamente
+// una recompensa, mostrar la barra llena
+
+if(compras > 0 && compras % 6 === 0){
+
+porcentaje = 100;
+
+}
+
+
+document
+.getElementById("barra")
+.style.width =
+`${porcentaje}%`;
+
+
+// ==========================================
+// RECOMPENSAS
+// ==========================================
+
+const premio =
+document.getElementById(
+"premio"
+);
+
+const extra =
+document.getElementById(
+"recompensasExtra"
+);
+
+const mensaje =
+document.getElementById(
+"mensaje"
+);
+
+
+if(recompensas > 0){
+
+premio.innerText =
+"🎉 ¡Tienes una recompensa!";
+
+
+extra.innerText =
+
+recompensas === 1
+
+? "Tienes 1 recompensa disponible"
+
+: `Tienes ${recompensas} recompensas disponibles`;
+
+
+mensaje.innerText =
+
+sobrantes === 0
+
+? "Puedes canjear tu recompensa en tu próxima visita 🍓"
+
+: `Además, tienes ${sobrantes} compra${sobrantes === 1 ? "" : "s"} acumulada${sobrantes === 1 ? "" : "s"} para tu siguiente recompensa. 🍓`;
+
+
+premio.classList.add(
+"premio-activo"
+);
+
+
+// ==========================================
+// CONFETTI
+// ==========================================
+
+if(navigator.vibrate){
+
+navigator.vibrate([
+200,
+100,
+200
+]);
+
+}
+
+
+if(typeof confetti === "function"){
+
 confetti({
 
-particleCount:150,
+particleCount:120,
 
-spread:90,
+spread:80,
 
-origin:{ y:0.6 }
+origin:{
+y:.6
+}
 
 });
 
 }
-else{
 
-let faltan =
-6 - data.compras;
 
-document.getElementById("premio").innerText =
-"Premio en progreso ✨";
+}else{
 
-document.getElementById("mensaje").innerText =
-`Te faltan ${faltan} compras para desbloquear tu recompensa`;
+premio.innerText =
+"✨ Premio en progreso";
+
+
+extra.innerText =
+"";
+
+
+const faltan =
+6 - comprasEnCiclo;
+
+
+mensaje.innerText =
+
+`Te faltan ${faltan} compra${faltan === 1 ? "" : "s"} para desbloquear tu recompensa. 🍓`;
 
 }
 
-}
-catch(error){
 
-console.log(error);
+}catch(error){
 
-document.getElementById("nombre").innerText =
+
+console.error(error);
+
+
+document
+.getElementById("nombre")
+.innerText =
 "Error";
 
-document.getElementById("mensaje").innerText =
-"No se pudo cargar la información";
+
+document
+.getElementById("mensaje")
+.innerText =
+"No se pudo cargar la información de tu tarjeta.";
+
 
 }
 
 }
+
+
+// ==========================================
+// INICIAR
+// ==========================================
 
 cargarCliente();
 
 </script>
 
+
 </body>
+
 </html>

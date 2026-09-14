@@ -1,163 +1,843 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Panel Admin</title>
+<title>Panel Admin | Fresas & Crema Co.</title>
 
 <style>
 
-body{
-font-family:Arial;
-background:#f5f5f5;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-margin:0;
-}
-
-.card{
-background:white;
-padding:30px;
-border-radius:20px;
-width:350px;
-box-shadow:0 5px 15px rgba(0,0,0,0.1);
-text-align:center;
-}
-
-input{
-width:100%;
-padding:12px;
-margin-top:15px;
-border-radius:10px;
-border:1px solid #ccc;
-font-size:16px;
+*{
 box-sizing:border-box;
 }
 
-button{
-width:100%;
-padding:14px;
-margin-top:15px;
-border:none;
-border-radius:10px;
-font-size:16px;
-cursor:pointer;
-background:#ff4d6d;
+body{
+
+margin:0;
+
+font-family:Arial, sans-serif;
+
+background:#111111;
+
+min-height:100vh;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+padding:20px;
+
 color:white;
+
+}
+
+.card{
+
+width:100%;
+
+max-width:390px;
+
+background:#181818;
+
+border:2px solid #f3a6bd;
+
+border-radius:28px;
+
+padding:30px 25px;
+
+box-shadow:0 0 25px rgba(243,166,189,.20);
+
+text-align:center;
+
+}
+
+.logo{
+
+width:120px;
+
+height:120px;
+
+object-fit:cover;
+
+border-radius:50%;
+
+border:4px solid #f3a6bd;
+
+margin-bottom:15px;
+
+}
+
+h1{
+
+margin:5px 0;
+
+font-size:27px;
+
+color:#f3a6bd;
+
+}
+
+.subtitulo{
+
+font-size:14px;
+
+color:#dddddd;
+
+margin-bottom:25px;
+
+}
+
+input{
+
+width:100%;
+
+padding:14px;
+
+border-radius:12px;
+
+border:1px solid #f3a6bd;
+
+background:#242424;
+
+color:white;
+
+font-size:16px;
+
+outline:none;
+
+text-align:center;
+
+}
+
+input::placeholder{
+
+color:#aaaaaa;
+
+}
+
+button{
+
+width:100%;
+
+padding:14px;
+
+margin-top:12px;
+
+border:none;
+
+border-radius:12px;
+
+font-size:16px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:.2s;
+
+}
+
+button:active{
+
+transform:scale(.97);
+
+}
+
+.buscar{
+
+background:#f3a6bd;
+
+color:#111111;
+
+}
+
+.compra{
+
+background:white;
+
+color:#111111;
+
+}
+
+.canjes{
+
+background:#e889a6;
+
+color:white;
+
+}
+
+button:disabled{
+
+background:#555555;
+
+color:#999999;
+
+cursor:not-allowed;
+
 }
 
 .info{
-margin-top:20px;
+
+margin-top:25px;
+
+padding:20px;
+
+border-radius:20px;
+
+background:#222222;
+
+border:1px solid #333333;
+
+}
+
+.nombre{
+
+font-size:23px;
+
+font-weight:bold;
+
+color:#f3a6bd;
+
+margin-bottom:12px;
+
+}
+
+.compras{
+
+font-size:21px;
+
+font-weight:bold;
+
+margin:8px 0;
+
+}
+
+.premio{
+
+font-size:14px;
+
+color:#cccccc;
+
+margin-bottom:12px;
+
+}
+
+.recompensas{
+
+background:#f3a6bd;
+
+color:#111111;
+
+padding:10px;
+
+border-radius:12px;
+
+font-weight:bold;
+
+margin-top:12px;
+
+}
+
+.mensaje{
+
+margin-top:15px;
+
+font-size:14px;
+
+min-height:20px;
+
+}
+
+.exito{
+
+color:#8df0b0;
+
+}
+
+.error{
+
+color:#ff8fa8;
+
+}
+
+.oculto{
+
+display:none;
+
+}
+
+.footer{
+
+margin-top:22px;
+
+font-size:12px;
+
+color:#888888;
+
 }
 
 </style>
 
 </head>
 
+
 <body>
+
 
 <div class="card">
 
+
+<img
+src="logo.jpeg"
+class="logo"
+alt="Fresas & Crema Co."
+>
+
+
 <h1>Panel Admin 🍓</h1>
 
-<input type="text" id="clienteID" placeholder="ID Cliente">
+<div class="subtitulo">
 
-<button onclick="buscarCliente()">
-Buscar Cliente
-</button>
-
-<div class="info">
-
-<h2 id="nombre"></h2>
-
-<p id="compras"></p>
-
-<p id="premio"></p>
+Control de clientes y tarjetas de lealtad
 
 </div>
 
-<button onclick="agregarCompra()">
-+1 Compra
+
+<input
+type="text"
+id="clienteID"
+placeholder="Ej. A0001"
+autocomplete="off"
+>
+
+
+<button
+class="buscar"
+onclick="buscarCliente()"
+>
+
+🔎 Buscar cliente
+
 </button>
 
-<button onclick="canjearPremio()">
+
+<div
+id="info"
+class="info oculto"
+>
+
+
+<div
+id="nombre"
+class="nombre"
+></div>
+
+
+<div
+id="compras"
+class="compras"
+></div>
+
+
+<div
+id="premio"
+class="premio"
+></div>
+
+
+<div
+id="recompensas"
+class="recompensas"
+></div>
+
+
+<button
+class="compra"
+onclick="agregarCompra()"
+>
+
+🍓 +1 Compra
+
+</button>
+
+
+<button
+id="btnCanjear"
+class="canjes"
+onclick="canjearPremio()"
+>
+
 🎁 Canjear recompensa
+
 </button>
 
+
+<div
+id="mensaje"
+class="mensaje"
+></div>
+
+
 </div>
+
+
+<div class="footer">
+
+Fresas & Crema Co. ♡
+
+</div>
+
+
+</div>
+
+
 
 <script>
 
-const API = "https://script.google.com/macros/s/AKfycbwUYoG26VicpM1Y3uWhJH-J86BpI93CPUKQZL57-rokQYHS-SIz6sgK7GIM4oZTp_n4/exec";
+
+// ==========================================
+// URL DE GOOGLE APPS SCRIPT
+// ==========================================
+
+const API =
+"https://script.google.com/macros/s/AKfycbwUYoG26VicpM1Y3uWhJH-J86BpI93CPUKQZL57-rokQYHS-SIz6sgK7GIM4oZTp_n4/exec";
+
+
 
 let clienteActual = "";
 
+let comprasActuales = 0;
+
+
+
+// ==========================================
+// BUSCAR CLIENTE
+// ==========================================
+
 async function buscarCliente(){
 
-const id = document.getElementById("clienteID").value;
+const id =
+document
+.getElementById("clienteID")
+.value
+.trim()
+.toUpperCase();
+
+
+if(id === ""){
+
+mostrarMensaje(
+"Escribe el ID del cliente",
+"error"
+);
+
+return;
+
+}
+
+
+try{
+
+const response =
+await fetch(
+`${API}?id=${encodeURIComponent(id)}`
+);
+
+
+const data =
+await response.json();
+
+
+if(!data.nombre){
+
+document
+.getElementById("info")
+.classList.add("oculto");
+
+
+mostrarMensaje(
+"Cliente no encontrado",
+"error"
+);
+
+return;
+
+}
+
 
 clienteActual = id;
 
-const response = await fetch(`${API}?id=${id}`);
+comprasActuales =
+Number(data.compras) || 0;
 
-const data = await response.json();
 
-document.getElementById("nombre").innerText =
+document
+.getElementById("info")
+.classList.remove("oculto");
+
+
+document
+.getElementById("nombre")
+.innerText =
 data.nombre;
 
-document.getElementById("compras").innerText =
-`Compras: ${data.compras}`;
 
-document.getElementById("premio").innerText =
-`Premio: ${data.premio}`;
+actualizarInformacion(data);
+
+
+mostrarMensaje("", "");
+
+
+}catch(error){
+
+console.error(error);
+
+mostrarMensaje(
+"Error al consultar el cliente",
+"error"
+);
 
 }
+
+}
+
+
+
+// ==========================================
+// ACTUALIZAR INFORMACIÓN
+// ==========================================
+
+function actualizarInformacion(data){
+
+comprasActuales =
+Number(data.compras) || 0;
+
+
+document
+.getElementById("compras")
+.innerText =
+`🍓 Compras acumuladas: ${comprasActuales}`;
+
+
+document
+.getElementById("premio")
+.innerText =
+`Premio: ${data.premio || "Pendiente"}`;
+
+
+// ==========================================
+// CALCULAR RECOMPENSAS
+// ==========================================
+
+const recompensas =
+Math.floor(comprasActuales / 6);
+
+
+const sobrantes =
+comprasActuales % 6;
+
+
+if(recompensas > 0){
+
+document
+.getElementById("recompensas")
+.innerText =
+`🎁 Recompensas disponibles: ${recompensas}`;
+
+}else{
+
+const faltan =
+6 - sobrantes;
+
+document
+.getElementById("recompensas")
+.innerText =
+`🍓 Faltan ${faltan} compras para tu recompensa`;
+
+}
+
+
+// ==========================================
+// ACTIVAR / DESACTIVAR CANJE
+// ==========================================
+
+const boton =
+document.getElementById("btnCanjear");
+
+
+if(comprasActuales >= 6){
+
+boton.disabled = false;
+
+}else{
+
+boton.disabled = true;
+
+}
+
+}
+
+
+
+// ==========================================
+// AGREGAR COMPRA
+// ==========================================
 
 async function agregarCompra(){
 
-if(clienteActual == ""){
-alert("Busca un cliente primero");
+if(clienteActual === ""){
+
+mostrarMensaje(
+"Busca un cliente primero",
+"error"
+);
+
 return;
+
 }
 
+
+try{
+
+const response =
 await fetch(API,{
+
 method:"POST",
+
 body:JSON.stringify({
+
 id:clienteActual
+
 })
+
 });
 
-buscarCliente();
 
-alert("Compra agregada 🍓");
+const data =
+await response.json();
+
+
+if(data.success){
+
+comprasActuales =
+Number(data.compras);
+
+
+const cliente =
+await obtenerCliente();
+
+
+actualizarInformacion(cliente);
+
+
+mostrarMensaje(
+"¡Compra agregada! 🍓",
+"exito"
+);
+
+
+}else{
+
+mostrarMensaje(
+data.error || "No se pudo agregar la compra",
+"error"
+);
 
 }
+
+
+}catch(error){
+
+console.error(error);
+
+mostrarMensaje(
+"Error al agregar la compra",
+"error"
+);
+
+}
+
+}
+
+
+
+// ==========================================
+// CANJEAR RECOMPENSA
+// ==========================================
 
 async function canjearPremio(){
 
-if(clienteActual == ""){
-alert("Busca un cliente primero");
+if(clienteActual === ""){
+
+mostrarMensaje(
+"Busca un cliente primero",
+"error"
+);
+
 return;
+
 }
 
+
+if(comprasActuales < 6){
+
+mostrarMensaje(
+"El cliente aún no tiene 6 compras",
+"error"
+);
+
+return;
+
+}
+
+
+const recompensas =
+Math.floor(comprasActuales / 6);
+
+
+const confirmar =
+confirm(
+
+`¿Confirmar canje de 1 recompensa? 🍓\n\n` +
+
+`Compras actuales: ${comprasActuales}\n` +
+
+`Recompensas disponibles: ${recompensas}\n\n` +
+
+`Después del canje conservará ${comprasActuales - 6} compras.`
+
+);
+
+
+if(!confirmar){
+
+return;
+
+}
+
+
+try{
+
+const response =
 await fetch(API,{
+
 method:"POST",
+
 body:JSON.stringify({
+
 id:clienteActual,
+
 action:"reset"
+
 })
+
 });
 
-buscarCliente();
 
-alert("Recompensa canjeada 🎉");
+const data =
+await response.json();
+
+
+if(data.success){
+
+comprasActuales =
+Number(data.compras);
+
+
+const cliente =
+await obtenerCliente();
+
+
+actualizarInformacion(cliente);
+
+
+mostrarMensaje(
+
+`🎉 Premio canjeado. Le quedan ${comprasActuales} compras.`,
+
+"exito"
+
+);
+
+
+}else{
+
+mostrarMensaje(
+
+data.error ||
+"No se pudo canjear la recompensa",
+
+"error"
+
+);
+
+}
+
+
+}catch(error){
+
+console.error(error);
+
+mostrarMensaje(
+"Error al canjear la recompensa",
+"error"
+);
+
+}
+
+}
+
+
+
+// ==========================================
+// OBTENER CLIENTE ACTUALIZADO
+// ==========================================
+
+async function obtenerCliente(){
+
+const response =
+await fetch(
+
+`${API}?id=${encodeURIComponent(clienteActual)}`
+
+);
+
+
+return await response.json();
+
+}
+
+
+
+// ==========================================
+// MOSTRAR MENSAJE
+// ==========================================
+
+function mostrarMensaje(texto,tipo){
+
+const elemento =
+document.getElementById("mensaje");
+
+
+elemento.innerText =
+texto;
+
+
+elemento.className =
+"mensaje " + tipo;
 
 }
 
 </script>
 
+
 </body>
+
 </html>

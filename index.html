@@ -10,38 +10,6 @@ content="width=device-width, initial-scale=1.0">
 
 <title>Fresas & Crema Co. | Tarjeta de Lealtad</title>
 
-<!-- QR CODE -->
-<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-
-
-<style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
-body{
-
-min-height:100vh;
-
-display:flex;
-justify-content:center;
-align-items:center;
-
-padding:20px;
-
-background:#111111;
-
-font-family:Arial, sans-serif;
-
-color:white;
-
-overflow-x:hidden;
-
-}
-
 
 <style>
 
@@ -468,96 +436,78 @@ color:#cfcfcf;
 
 .qr-section{
 
-margin-top:30px;
+margin-top:25px;
 
-padding-top:25px;
+padding-top:22px;
 
 border-top:1px solid #292929;
 
+position:relative;
+
+z-index:2;
+
 }
 
 
-/* CAJA DEL QR */
+.qr-title{
 
-.qr-box{
+font-size:11px;
 
-width:263px;
+letter-spacing:3px;
 
-height:263px;
+color:#999999;
+
+margin-bottom:13px;
+
+text-transform:uppercase;
+
+}
+
+
+.qr-container{
+
+display:inline-flex;
 
 background:white;
 
-border-radius:27px;
+padding:10px;
 
-margin:0 auto;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-padding:18px;
+border-radius:18px;
 
 box-shadow:
 
-0 10px 30px rgba(0,0,0,.35);
+0 5px 25px rgba(0,0,0,.4),
+
+0 0 20px rgba(243,166,189,.10);
 
 }
 
 
-/* QR */
+.qr-container img{
 
-#qrcode{
+width:155px;
 
-width:225px;
-
-height:225px;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-}
-
-#qrcode img{
-
-width:225px !important;
-
-height:225px !important;
+height:155px;
 
 display:block;
 
 }
 
-#qrcode canvas{
-
-width:225px !important;
-
-height:225px !important;
-
-display:block;
-
-}
-
-
-/* TEXTO SCAN */
 
 .scan-text{
 
-margin-top:15px;
+margin-top:10px;
 
-letter-spacing:6px;
+font-size:11px;
 
-font-size:14px;
-
-font-weight:bold;
+letter-spacing:3px;
 
 color:#f3a6bd;
 
+font-weight:bold;
+
 }
+
 
 /* ==========================================
    PIE

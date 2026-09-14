@@ -8,92 +8,119 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>Fresas & Crema Co. | Tarjeta de Lealtad</title>
+<title>Fresas & Crema Co.</title>
+
+
+<!-- QR CODE -->
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 
 
 <style>
-
-/* ==========================================
-   CONFIGURACIÓN GENERAL
-========================================== */
 
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial, sans-serif;
 }
-
 
 body{
 
 min-height:100vh;
 
 display:flex;
-
 justify-content:center;
-
 align-items:center;
-
-background:
-
-radial-gradient(
-circle at top left,
-rgba(243,166,189,.16),
-transparent 35%
-),
-
-radial-gradient(
-circle at bottom right,
-rgba(243,166,189,.10),
-transparent 35%
-),
-
-#0d0d0d;
 
 padding:20px;
 
+background:#111111;
+
+font-family:Arial, sans-serif;
+
 color:white;
+
+overflow-x:hidden;
 
 }
 
 
-/* ==========================================
-   TARJETA
-========================================== */
+/* DECORACIÓN */
+
+body::before{
+
+content:"";
+
+position:fixed;
+
+width:220px;
+height:220px;
+
+border-radius:50%;
+
+background:#f3a6bd;
+
+opacity:.08;
+
+left:-120px;
+bottom:-70px;
+
+}
+
+body::after{
+
+content:"";
+
+position:fixed;
+
+width:160px;
+height:160px;
+
+border-radius:50%;
+
+background:#f3a6bd;
+
+opacity:.05;
+
+right:-80px;
+top:-50px;
+
+}
+
+
+/* TARJETA */
 
 .card{
 
-width:100%;
+width:390px;
 
-max-width:390px;
+max-width:100%;
 
 background:#151515;
 
-border:1px solid rgba(243,166,189,.65);
+border:1px solid rgba(243,166,189,.25);
 
 border-radius:30px;
 
-padding:28px 25px 25px;
+padding:32px 28px 30px;
 
 text-align:center;
+
+box-shadow:
+
+0 25px 60px rgba(0,0,0,.55),
+
+0 0 40px rgba(243,166,189,.05);
 
 position:relative;
 
 overflow:hidden;
-
-box-shadow:
-
-0 20px 60px rgba(0,0,0,.55),
-
-0 0 35px rgba(243,166,189,.08);
 
 animation:entrada .8s ease;
 
 }
 
 
-/* brillo decorativo */
+/* LÍNEA SUPERIOR */
 
 .card::before{
 
@@ -101,202 +128,131 @@ content:"";
 
 position:absolute;
 
-width:180px;
+top:0;
+left:0;
+right:0;
 
-height:180px;
+height:2px;
 
-border-radius:50%;
+background:
 
-background:rgba(243,166,189,.07);
+linear-gradient(
 
-top:-90px;
+90deg,
 
-right:-80px;
+transparent,
 
-}
+#f3a6bd,
 
-.card::after{
+transparent
 
-content:"";
-
-position:absolute;
-
-width:140px;
-
-height:140px;
-
-border-radius:50%;
-
-background:rgba(243,166,189,.05);
-
-bottom:-70px;
-
-left:-60px;
+);
 
 }
 
 
-/* ==========================================
-   DECORACIÓN SUPERIOR
-========================================== */
-
-.decoracion{
-
-color:#f3a6bd;
-
-font-size:17px;
-
-letter-spacing:5px;
-
-margin-bottom:12px;
-
-}
-
-
-/* ==========================================
-   LOGO
-========================================== */
+/* LOGO */
 
 .logo{
 
-display:flex;
-
-justify-content:center;
-
-margin-bottom:15px;
-
-position:relative;
-
-z-index:2;
+margin-bottom:22px;
 
 }
-
 
 .logo img{
 
-width:175px;
+width:190px;
 
 max-width:80%;
 
-height:auto;
+display:block;
+
+margin:auto;
 
 }
 
 
-/* ==========================================
-   TEXTO
-========================================== */
+/* DECORACIÓN */
 
-.titulo{
+.decoracion{
 
-font-size:12px;
+font-size:22px;
 
-letter-spacing:4px;
+color:#f3a6bd;
 
-text-transform:uppercase;
-
-color:#aaaaaa;
+letter-spacing:8px;
 
 margin-bottom:8px;
 
 }
 
 
-.nombre{
+/* NOMBRE */
+
+h1{
 
 font-family:Georgia, serif;
 
 font-size:30px;
 
-font-weight:bold;
-
-color:#f3a6bd;
-
-margin-bottom:18px;
-
-word-break:break-word;
-
-}
-
-
-/* ==========================================
-   SECCIÓN DE COMPRAS
-========================================== */
-
-.seccion-compras{
-
-background:#1d1d1d;
-
-border:1px solid #303030;
-
-border-radius:22px;
-
-padding:20px 16px;
-
-position:relative;
-
-z-index:2;
-
-}
-
-
-.etiqueta{
-
-font-size:12px;
-
-letter-spacing:2px;
-
-text-transform:uppercase;
-
-color:#999999;
-
-margin-bottom:7px;
-
-}
-
-
-.numero-compras{
-
-font-family:Georgia, serif;
-
-font-size:30px;
-
-font-weight:bold;
+font-weight:normal;
 
 color:white;
 
-}
-
-
-.numero-compras span{
-
-color:#f3a6bd;
+margin-bottom:6px;
 
 }
 
 
-/* ==========================================
-   ESTAMPAS DE LAS 6 COMPRAS
-========================================== */
+/* ID */
 
-.estampas{
+.id{
+
+font-size:12px;
+
+letter-spacing:3px;
+
+color:#888;
+
+margin-bottom:25px;
+
+}
+
+
+/* COMPRAS */
+
+.compras{
+
+font-size:16px;
+
+letter-spacing:2px;
+
+color:#ddd;
+
+margin-bottom:18px;
+
+}
+
+
+/* SELLOS */
+
+.sellos{
 
 display:flex;
 
 justify-content:center;
 
-gap:8px;
+gap:10px;
 
-margin-top:18px;
+margin:20px 0 18px;
 
 }
 
+.sello{
 
-.estampa{
+width:42px;
 
-width:34px;
-
-height:34px;
+height:42px;
 
 border-radius:50%;
 
@@ -308,53 +264,48 @@ align-items:center;
 
 justify-content:center;
 
-font-size:15px;
+font-size:20px;
 
-background:#111;
-
-color:#777;
+color:#555;
 
 transition:.3s;
 
 }
 
-
-.estampa.activa{
-
-background:#f3a6bd;
+.sello.activo{
 
 border-color:#f3a6bd;
 
-color:#111;
+background:rgba(243,166,189,.12);
+
+color:#f3a6bd;
 
 box-shadow:
-0 0 12px rgba(243,166,189,.35);
+
+0 0 12px rgba(243,166,189,.25);
 
 transform:scale(1.05);
 
 }
 
 
-/* ==========================================
-   BARRA
-========================================== */
+/* BARRA */
 
 .progress{
 
 width:100%;
 
-height:8px;
+height:7px;
 
-background:#303030;
+background:#292929;
 
 border-radius:20px;
 
 overflow:hidden;
 
-margin-top:20px;
+margin:10px 0 25px;
 
 }
-
 
 .progress-bar{
 
@@ -365,26 +316,25 @@ width:0%;
 background:
 
 linear-gradient(
+
 90deg,
-#d986a3,
-#f3a6bd,
-#ffd2df
+
+#d982a1,
+
+#f3a6bd
+
 );
 
 border-radius:20px;
 
-transition:width .7s ease;
+transition:1s ease;
 
 }
 
 
-/* ==========================================
-   RECOMPENSA
-========================================== */
+/* PREMIO */
 
 .premio{
-
-margin-top:20px;
 
 font-size:18px;
 
@@ -392,8 +342,11 @@ font-weight:bold;
 
 color:#f3a6bd;
 
-}
+margin-top:12px;
 
+min-height:25px;
+
+}
 
 .premio-activo{
 
@@ -402,129 +355,130 @@ animation:brillo 1.2s infinite alternate;
 }
 
 
-.recompensas-extra{
-
-margin-top:7px;
-
-font-size:13px;
-
-color:#bdbdbd;
-
-}
-
-
-/* ==========================================
-   MENSAJE
-========================================== */
+/* MENSAJE */
 
 .mensaje{
 
-margin-top:14px;
-
 font-size:14px;
 
-line-height:1.5;
+line-height:1.6;
 
-color:#cfcfcf;
+color:#aaa;
+
+margin-top:10px;
 
 }
 
 
-/* ==========================================
-   QR
-========================================== */
+/* QR */
 
 .qr-section{
 
-margin-top:25px;
+margin-top:30px;
 
-padding-top:22px;
+padding-top:25px;
 
 border-top:1px solid #292929;
 
-position:relative;
-
-z-index:2;
-
 }
 
 
-.qr-title{
+/* CAJA DEL QR */
 
-font-size:11px;
+.qr-box{
 
-letter-spacing:3px;
+width:263px;
 
-color:#999999;
-
-margin-bottom:13px;
-
-text-transform:uppercase;
-
-}
-
-
-.qr-container{
-
-display:inline-flex;
+height:263px;
 
 background:white;
 
-padding:10px;
+border-radius:27px;
 
-border-radius:18px;
+margin:0 auto;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+padding:18px;
 
 box-shadow:
 
-0 5px 25px rgba(0,0,0,.4),
-
-0 0 20px rgba(243,166,189,.10);
+0 10px 30px rgba(0,0,0,.35);
 
 }
 
 
-.qr-container img{
+/* QR */
 
-width:155px;
+#qrcode{
 
-height:155px;
+width:225px;
+
+height:225px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+}
+
+#qrcode img{
+
+width:225px !important;
+
+height:225px !important;
+
+display:block;
+
+}
+
+#qrcode canvas{
+
+width:225px !important;
+
+height:225px !important;
 
 display:block;
 
 }
 
 
+/* TEXTO SCAN */
+
 .scan-text{
 
-margin-top:10px;
+margin-top:15px;
 
-font-size:11px;
+letter-spacing:6px;
 
-letter-spacing:3px;
-
-color:#f3a6bd;
+font-size:14px;
 
 font-weight:bold;
 
+color:#f3a6bd;
+
 }
 
 
-/* ==========================================
-   PIE
-========================================== */
+/* FOOTER */
 
 .footer{
 
-margin-top:22px;
+margin-top:28px;
 
-font-size:12px;
+font-family:Georgia, serif;
 
-color:#777;
+font-size:16px;
 
-letter-spacing:1px;
+color:#888;
 
 }
-
 
 .footer span{
 
@@ -533,9 +487,7 @@ color:#f3a6bd;
 }
 
 
-/* ==========================================
-   ANIMACIONES
-========================================== */
+/* ANIMACIONES */
 
 @keyframes entrada{
 
@@ -543,9 +495,7 @@ from{
 
 opacity:0;
 
-transform:
-translateY(30px)
-scale(.96);
+transform:translateY(25px) scale(.97);
 
 }
 
@@ -553,9 +503,7 @@ to{
 
 opacity:1;
 
-transform:
-translateY(0)
-scale(1);
+transform:translateY(0) scale(1);
 
 }
 
@@ -566,53 +514,65 @@ scale(1);
 
 from{
 
-transform:scale(1);
-
 text-shadow:
-0 0 0 rgba(243,166,189,0);
+
+0 0 0px #f3a6bd;
 
 }
 
 to{
 
-transform:scale(1.03);
-
 text-shadow:
-0 0 18px rgba(243,166,189,.65);
+
+0 0 15px #f3a6bd;
 
 }
 
 }
 
 
-/* ==========================================
-   MÓVIL
-========================================== */
+/* RESPONSIVE */
 
-@media(max-width:380px){
+@media(max-width:430px){
 
 .card{
 
-padding:
-25px 18px 22px;
+padding:28px 20px;
 
 }
 
+h1{
 
-.nombre{
-
-font-size:26px;
+font-size:27px;
 
 }
 
+.qr-box{
 
-.estampa{
+width:245px;
+height:245px;
 
-width:31px;
+}
 
-height:31px;
+#qrcode{
 
-font-size:13px;
+width:209px;
+height:209px;
+
+}
+
+#qrcode img,
+#qrcode canvas{
+
+width:209px !important;
+height:209px !important;
+
+}
+
+.sello{
+
+width:38px;
+height:38px;
 
 }
 
@@ -623,20 +583,18 @@ font-size:13px;
 </head>
 
 
-<!-- ==========================================
-     CONFETTI
-========================================== -->
-
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-
 <body>
 
 
 <div class="card">
 
 
-<!-- DECORACIÓN -->
+<div class="logo">
+
+<img src="logo.jpeg" alt="Fresas & Crema Co.">
+
+</div>
+
 
 <div class="decoracion">
 
@@ -645,74 +603,42 @@ font-size:13px;
 </div>
 
 
-<!-- LOGO -->
-
-<div class="logo">
-
-<img
-src="logo.jpeg"
-alt="Fresas & Crema Co."
->
-
-</div>
-
-
-<div class="titulo">
-
-Tarjeta de lealtad
-
-</div>
-
-
-<!-- NOMBRE -->
-
-<div
-class="nombre"
-id="nombre"
->
+<h1 id="nombre">
 
 Cargando...
 
-</div>
+</h1>
 
 
-<!-- COMPRAS -->
+<div class="id" id="clienteID">
 
-<div class="seccion-compras">
-
-
-<div class="etiqueta">
-
-Tu progreso
+CLIENTE
 
 </div>
 
 
-<div
-class="numero-compras"
-id="compras"
->
+<div class="compras" id="compras">
 
-Cargando...
+Cargando compras...
 
 </div>
 
 
-<!-- 6 ESTAMPAS -->
+<!-- SELLOS -->
 
-<div class="estampas">
+<div class="sellos">
 
-<div class="estampa" id="s1">🍓</div>
+<div class="sello" id="sello1">🍓</div>
 
-<div class="estampa" id="s2">🍓</div>
+<div class="sello" id="sello2">🍓</div>
 
-<div class="estampa" id="s3">🍓</div>
+<div class="sello" id="sello3">🍓</div>
 
-<div class="estampa" id="s4">🍓</div>
+<div class="sello" id="sello4">🍓</div>
 
-<div class="estampa" id="s5">🍓</div>
+<div class="sello" id="sello5">🍓</div>
 
-<div class="estampa" id="s6">🍓</div>
+<div class="sello" id="sello6">🍓</div>
 
 </div>
 
@@ -723,39 +649,23 @@ Cargando...
 
 <div
 class="progress-bar"
-id="barra"
-></div>
+id="barra">
+</div>
 
 </div>
 
 
-</div>
-
-
-<!-- RECOMPENSA -->
+<!-- PREMIO -->
 
 <div
 class="premio"
-id="premio"
->
-
-Cargando...
-
-</div>
-
-
-<div
-class="recompensas-extra"
-id="recompensasExtra"
->
-
+id="premio">
 </div>
 
 
 <div
 class="mensaje"
-id="mensaje"
->
+id="mensaje">
 
 Cargando información...
 
@@ -767,20 +677,9 @@ Cargando información...
 <div class="qr-section">
 
 
-<div class="qr-title">
+<div class="qr-box">
 
-Presenta este código para registrar tu compra
-
-</div>
-
-
-<div class="qr-container">
-
-<img
-id="qr"
-src=""
-alt="Código QR"
->
+<div id="qrcode"></div>
 
 </div>
 
@@ -794,8 +693,6 @@ SCAN ME
 
 </div>
 
-
-<!-- FOOTER -->
 
 <div class="footer">
 
@@ -811,17 +708,18 @@ Fresas & Crema Co. <span>♡</span>
 <script>
 
 
-// ==========================================
-// API
-// ==========================================
+/* =====================================
+   API
+===================================== */
 
 const API =
-"https://script.google.com/macros/s/AKfycbwUYoG26VicpM1Y3uWhJH-J86BpI93CPUKQZL57-rokQYHS-SIz6sgK7GIM4oZTp_n4/exec";
+
+"https://script.google.com/macros/s/AKfycbwUYoG26VicpM1Y3uWhJ-H86BpI93CPUKQZL57-rokQYHS-SIz6sgK7GIM4oZTp_n4/exec";
 
 
-// ==========================================
-// OBTENER ID
-// ==========================================
+/* =====================================
+   OBTENER ID
+===================================== */
 
 const params =
 new URLSearchParams(
@@ -832,37 +730,130 @@ const id =
 params.get("id");
 
 
-// ==========================================
-// CARGAR CLIENTE
-// ==========================================
+/* =====================================
+   CREAR QR
+===================================== */
+
+function generarQR(id){
+
+const contenedor =
+document.getElementById("qrcode");
+
+
+contenedor.innerHTML = "";
+
+
+/*
+URL QUE ABRIRÁ EL ADMIN
+*/
+
+const scanURL =
+
+"https://fannyml21.github.io/fresas-clientes/scan.html?id="
+
++ encodeURIComponent(id);
+
+
+/*
+Intentar generar QR
+*/
+
+try{
+
+if(typeof QRCode !== "undefined"){
+
+new QRCode(contenedor,{
+
+text:scanURL,
+
+width:225,
+
+height:225,
+
+colorDark:"#111111",
+
+colorLight:"#ffffff",
+
+correctLevel:
+QRCode.CorrectLevel.H
+
+});
+
+return;
+
+}
+
+}catch(error){
+
+console.log(
+"Error generando QR:",
+error
+);
+
+}
+
+
+/*
+RESPALDO
+*/
+
+const qrImagen =
+
+"https://api.qrserver.com/v1/create-qr-code/?size=300x300&data="
+
++ encodeURIComponent(scanURL);
+
+
+const imagen =
+document.createElement("img");
+
+
+imagen.src =
+qrImagen;
+
+imagen.alt =
+"QR de cliente";
+
+
+imagen.width =
+225;
+
+imagen.height =
+225;
+
+
+contenedor.appendChild(imagen);
+
+}
+
+
+/* =====================================
+   CARGAR CLIENTE
+===================================== */
 
 async function cargarCliente(){
+
+try{
 
 
 if(!id){
 
-document
-.getElementById("nombre")
-.innerText =
-"Cliente";
-
-
-document
-.getElementById("mensaje")
-.innerText =
-"No se encontró el identificador de la tarjeta.";
+document.getElementById("nombre").innerText =
+"Cliente no encontrado";
 
 return;
 
 }
 
 
-try{
-
+/* CONSULTAR API */
 
 const response =
+
 await fetch(
+
 `${API}?id=${encodeURIComponent(id)}&t=${Date.now()}`
+
 );
 
 
@@ -870,71 +861,62 @@ const data =
 await response.json();
 
 
-if(!data.nombre){
-
-throw new Error(
-"Cliente no encontrado"
+console.log(
+"Cliente:",
+data
 );
 
-}
+
+/* NOMBRE */
+
+document.getElementById(
+"nombre"
+).innerText =
+
+data.nombre || "Cliente";
 
 
-// ==========================================
-// NOMBRE
-// ==========================================
+/* ID */
 
-document
-.getElementById("nombre")
-.innerText =
-data.nombre;
+document.getElementById(
+"clienteID"
+).innerText =
+
+data.id || id;
 
 
-// ==========================================
-// COMPRAS
-// ==========================================
+/* COMPRAS */
 
 const compras =
 Number(data.compras) || 0;
 
 
-// Número de recompensas disponibles
+document.getElementById(
+"compras"
+).innerText =
+
+`Compras acumuladas: ${compras}`;
+
+
+/* =====================================
+   RECOMPENSAS
+===================================== */
 
 const recompensas =
-Math.floor(compras / 6);
 
+Math.floor(
+compras / 6
+);
 
-// Compras hacia la siguiente recompensa
 
 const sobrantes =
+
 compras % 6;
 
 
-// ==========================================
-// TEXTO DE COMPRAS
-// ==========================================
-
-if(recompensas > 0){
-
-document
-.getElementById("compras")
-.innerHTML =
-
-`${compras} <span>compras</span>`;
-
-}else{
-
-document
-.getElementById("compras")
-.innerHTML =
-
-`${compras} <span>/ 6</span>`;
-
-}
-
-
-// ==========================================
-// ESTAMPAS
-// ==========================================
+/* =====================================
+   SELLOS
+===================================== */
 
 const comprasEnCiclo =
 compras % 6;
@@ -942,19 +924,19 @@ compras % 6;
 
 for(let i = 1; i <= 6; i++){
 
-const estampa =
+const sello =
 document.getElementById(
-`s${i}`
+"sello" + i
 );
-
 
 if(
-comprasEnCiclo >= i ||
-(comprasEnCiclo === 0 && compras >= 6)
+i <= comprasEnCiclo ||
+
+(comprasEnCiclo === 0 && compras > 0 && i <= 6)
 ){
 
-estampa.classList.add(
-"activa"
+sello.classList.add(
+"activo"
 );
 
 }
@@ -962,95 +944,78 @@ estampa.classList.add(
 }
 
 
-// ==========================================
-// BARRA DE PROGRESO
-// ==========================================
+/* =====================================
+   BARRA
+===================================== */
 
 let porcentaje =
+
 (comprasEnCiclo / 6) * 100;
 
 
-// Si acaba de completar exactamente
-// una recompensa, mostrar la barra llena
+/*
+Si tiene exactamente 6,
+la barra se muestra completa
+*/
 
-if(compras > 0 && compras % 6 === 0){
+if(
+compras > 0 &&
+compras % 6 === 0
+){
 
 porcentaje = 100;
 
 }
 
 
-document
-.getElementById("barra")
-.style.width =
-`${porcentaje}%`;
-
-
-// ==========================================
-// RECOMPENSAS
-// ==========================================
-
-const premio =
 document.getElementById(
-"premio"
-);
+"barra"
+).style.width =
 
-const extra =
-document.getElementById(
-"recompensasExtra"
-);
+porcentaje + "%";
 
-const mensaje =
-document.getElementById(
-"mensaje"
-);
 
+/* =====================================
+   PREMIO
+===================================== */
 
 if(recompensas > 0){
 
-premio.innerText =
-"🎉 ¡Tienes una recompensa!";
+document.getElementById(
+"premio"
+).innerText =
 
+`🎉 ¡Tienes ${recompensas} recompensa${recompensas > 1 ? "s" : ""}!`;
 
-extra.innerText =
-
-recompensas === 1
-
-? "Tienes 1 recompensa disponible"
-
-: `Tienes ${recompensas} recompensas disponibles`;
-
-
-mensaje.innerText =
-
-sobrantes === 0
-
-? "Puedes canjear tu recompensa en tu próxima visita 🍓"
-
-: `Además, tienes ${sobrantes} compra${sobrantes === 1 ? "" : "s"} acumulada${sobrantes === 1 ? "" : "s"} para tu siguiente recompensa. 🍓`;
-
-
-premio.classList.add(
+document.getElementById(
+"premio"
+).classList.add(
 "premio-activo"
 );
 
 
-// ==========================================
-// CONFETTI
-// ==========================================
+if(sobrantes > 0){
 
-if(navigator.vibrate){
+document.getElementById(
+"mensaje"
+).innerText =
 
-navigator.vibrate([
-200,
-100,
-200
-]);
+`Tienes ${sobrantes} compra${sobrantes > 1 ? "s" : ""} acumulada${sobrantes > 1 ? "s" : ""} para tu próxima recompensa 🍓`;
+
+}else{
+
+document.getElementById(
+"mensaje"
+).innerText =
+
+"Tu recompensa está lista para ser canjeada 🍓";
 
 }
 
 
-if(typeof confetti === "function"){
+/* CONFETI */
+
+if(typeof confetti !== "undefined"){
 
 confetti({
 
@@ -1066,58 +1031,89 @@ y:.6
 
 }
 
-
-}else{
-
-premio.innerText =
-"✨ Premio en progreso";
-
-
-extra.innerText =
-"";
+}
+else{
 
 
 const faltan =
-6 - comprasEnCiclo;
+6 - compras;
 
 
-mensaje.innerText =
+document.getElementById(
+"premio"
+).innerText =
 
-`Te faltan ${faltan} compra${faltan === 1 ? "" : "s"} para desbloquear tu recompensa. 🍓`;
+"Premio en progreso ✨";
+
+
+document.getElementById(
+"mensaje"
+).innerText =
+
+`Te faltan ${faltan} compra${faltan > 1 ? "s" : ""} para desbloquear tu recompensa`;
+
 
 }
 
 
-}catch(error){
+/* =====================================
+   GENERAR QR
+===================================== */
+
+generarQR(id);
 
 
-console.error(error);
+}
+catch(error){
+
+console.error(
+"Error:",
+error
+);
 
 
-document
-.getElementById("nombre")
-.innerText =
+document.getElementById(
+"nombre"
+).innerText =
+
 "Error";
 
 
-document
-.getElementById("mensaje")
-.innerText =
-"No se pudo cargar la información de tu tarjeta.";
+document.getElementById(
+"mensaje"
+).innerText =
 
+"No se pudo cargar la información";
+
+
+/*
+Aun si falla la API,
+intentamos generar el QR
+*/
+
+if(id){
+
+generarQR(id);
 
 }
 
 }
 
+}
 
-// ==========================================
-// INICIAR
-// ==========================================
+
+/* =====================================
+   INICIAR
+===================================== */
 
 cargarCliente();
 
 </script>
+
+
+<!-- CONFETTI -->
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 
 </body>
